@@ -40,21 +40,13 @@ function advanceSnake() {
   snake.pop();
 }
 
-stepOne();
-function stepOne() {
-  setTimeout(function onTick() {
-    clearCanvas();
-    advanceSnake();
-    drawSnake();
-    stepTwo();
-  }, 100);
-}
+main();
 
-function stepTwo() {
+function main() {
   setTimeout(function onTick() {
     clearCanvas();
     advanceSnake();
     drawSnake();
-    stepThree();
+    main();
   }, 100);
 }
