@@ -26,3 +26,15 @@ function drawSnake() {
 }
 
 drawSnake();
+
+let dx = 10;
+
+function advanceSnake() {
+  const head = { x: snake[0].x + dx, y: snake[0].y + dy };
+  snake.unshift(head);
+  snake.pop();
+}
+
+// function moveSnakeLeft() {
+//     dx = -10;
+//   }
