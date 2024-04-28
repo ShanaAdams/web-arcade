@@ -1,5 +1,5 @@
-let canvas = document.getElementById("gameCanvas");
-let context = canvas.getContext("2d");
+const canvas = document.getElementById("gameCanvas");
+const context = canvas.getContext("2d");
 
 context.fillStyle = "white";
 context.fillRect(0, 0, 300, 300);
@@ -28,13 +28,10 @@ function drawSnake() {
 drawSnake();
 
 let dx = 10;
+let dy = 0;
 
 function advanceSnake() {
   const head = { x: snake[0].x + dx, y: snake[0].y + dy };
   snake.unshift(head);
   snake.pop();
 }
-
-// function moveSnakeLeft() {
-//     dx = -10;
-//   }
