@@ -57,6 +57,8 @@ function changeDirection(event) {
     dy = 10;
   }
 }
+
+document.addEventListener("keydown", changeDirection);
 /*
  * Advances the snake by changing the x-coordinates of its parts
  * according to the horizontal velocity and the y-coordinates of its parts
