@@ -28,6 +28,18 @@ function drawSnake() {
   snake.forEach(drawSnakePart);
 }
 
+function changeDirection(event) {
+  const LEFT_KEY = 37;
+  const RIGHT_KEY = 39;
+  const UP_KEY = 38;
+  const DOWN_KEY = 40;
+
+  const keyPressed = event.keyCode;
+  const goingUp = dy === -10;
+  const goingDown = dy === 10;
+  const goingRight = dx === 10;
+  const goingLeft = dx === -10;
+}
 /*
  * Advances the snake by changing the x-coordinates of its parts
  * according to the horizontal velocity and the y-coordinates of its parts
