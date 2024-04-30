@@ -84,7 +84,10 @@ createFood();
 main();
 
 function main() {
-  if (didGameEnd()) return;
+  if (didGameEnd()) {
+    drawGameOver();
+    return;
+  }
   setTimeout(function onTick() {
     clearCanvas();
     drawFood();
@@ -125,4 +128,12 @@ function didGameEnd() {
   const hitToptWall = snake[0].y < 0;
   const hitBottomWall = snake[0].y > gameCanvas.height - 10;
   return hitLeftWall || hitRightWall || hitToptWall || hitBottomWall;
+}
+
+function drawGameOver() {
+  context.fillStyle = "black";
+  context.textBaseline = "middle";
+  context.textAlign = "center";
+  context.font = "normal bold 20px serif";
+  context.fillText("Game Over!", gameCanvas.width / 2, gameCanvas.height / 2);
 }
