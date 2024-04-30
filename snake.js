@@ -68,8 +68,15 @@ document.addEventListener("keydown", changeDirection);
 function advanceSnake() {
   const head = { x: snake[0].x + dx, y: snake[0].y + dy };
   snake.unshift(head);
-  snake.pop();
+  const didEatFood = snake[0].x === foodX && snake[0].y === foodY;
+
+  if (didEatFood) {
+    createFood();
+  } else {
+    snake.pop();
+  }
 }
+
 createFood();
 main();
 
@@ -79,7 +86,6 @@ function main() {
     drawFood();
     advanceSnake();
     drawSnake();
-
     main();
   }, 100);
 }
