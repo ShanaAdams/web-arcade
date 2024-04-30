@@ -72,6 +72,8 @@ function advanceSnake() {
   const didEatFood = snake[0].x === foodX && snake[0].y === foodY;
 
   if (didEatFood) {
+    score += 10;
+    document.getElementById("score").innerHTML = score;
     createFood();
   } else {
     snake.pop();
