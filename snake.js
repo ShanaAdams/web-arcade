@@ -14,6 +14,7 @@ let snake = [
   { x: 120, y: 150 },
   { x: 110, y: 150 },
 ];
+let score = 0;
 let dx = 10;
 let dy = 0;
 
