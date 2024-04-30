@@ -70,14 +70,36 @@ function advanceSnake() {
   snake.unshift(head);
   snake.pop();
 }
-
+createFood();
 main();
 
 function main() {
   setTimeout(function onTick() {
     clearCanvas();
+    drawFood();
     advanceSnake();
     drawSnake();
+
     main();
   }, 100);
+}
+
+function randomTen(min, max) {
+  return Math.round((Math.random() * (max - min) + min) / 10) * 10;
+}
+
+function createFood() {
+  foodX = randomTen(0, gameCanvas.width - 10);
+  foodY = randomTen(0, gameCanvas.height - 10);
+  snake.forEach(function isFoodOnSnake(part) {
+    const foodIsOnSnake = part.x == foodX && part.y == foodY;
+    if (foodIsOnSnake) createFood();
+  });
+}
+
+function drawFood() {
+  context.fillStyle = "red";
+  context.strokeStyle = "darkred";
+  context.fillRect(foodX, foodY, 10, 10);
+  context.strokeRect(foodX, foodY, 10, 10);
 }
