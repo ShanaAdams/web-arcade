@@ -1,5 +1,8 @@
 const canvas = document.getElementById("gameCanvas");
 const context = canvas.getContext("2d");
+const startButton = document
+  .getElementById("startButton")
+  .addEventListener("click", restartGame);
 function clearCanvas() {
   context.fillStyle = "white";
   context.fillRect(0, 0, gameCanvas.width, gameCanvas.height);
@@ -150,18 +153,26 @@ function drawFood() {
 let gameOverInterval;
 
 function didGameEnd() {
-  for (let i = 4; i < snake.length; i++) {
-    const didCollide = snake[i].x === snake[0].x && snake[i].y === snake[0].y;
-
-    if (didCollide) {
-      startGameOver();
-      return true;
-    }
-  }
   const hitLeftWall = snake[0].x < 0;
   const hitRightWall = snake[0].x > gameCanvas.width - 10;
   const hitToptWall = snake[0].y < 0;
   const hitBottomWall = snake[0].y > gameCanvas.height - 10;
+
+  for (let i = 4; i < snake.length; i++) {
+    const didCollide = snake[i].x === snake[0].x && snake[i].y === snake[0].y;
+
+    if (
+      didCollide ||
+      hitLeftWall ||
+      hitRightWall ||
+      hitToptWall ||
+      hitBottomWall
+    ) {
+      updateHighScore();
+      startGameOver();
+      return true;
+    }
+  }
 
   if (hitLeftWall || hitRightWall || hitToptWall || hitBottomWall) {
     startGameOver();
@@ -185,11 +196,29 @@ function drawGameOver() {
 function startGameOver() {
   gameOverInterval = setInterval(() => {
     gameOverVisible = !gameOverVisible;
-    clearCanvas();
+
     drawGameOver();
   }, 400);
 }
+function displayHighScore() {}
 
 function restartGame() {
   clearInterval(gameOverInterval);
+  gameOverVisible = false;
+
+  // Reset game variables to their initial state
+  snake = [
+    { x: 150, y: 150 },
+    { x: 140, y: 150 },
+    { x: 130, y: 150 },
+    { x: 120, y: 150 },
+    { x: 110, y: 150 },
+  ];
+  score = 0;
+  dx = 10;
+  dy = 0;
+  // Restart the game loop
+  main();
 }
+
+document.addEventListener("keydown", changeDirection);
