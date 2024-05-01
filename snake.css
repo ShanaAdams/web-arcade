@@ -8,12 +8,23 @@ body {
 #score {
   margin-bottom: 20px;
   font-size: 10em;
+  font-family: "Jersey 15", sans-serif;
+  font-weight: 400;
+  font-style: normal;
 }
 
 #gameCanvas {
   margin-bottom: 20px;
+  border-radius: 5px;
 }
 
 .startButton {
   margin-top: 20px;
+}
+
+.jersey-15-regular {
+  font-family: "Jersey 15", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 5em;
 }

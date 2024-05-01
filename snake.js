@@ -99,6 +99,7 @@ function main() {
     return;
   }
   setTimeout(function onTick() {
+    changingDirection = false;
     clearCanvas();
     drawFood();
     advanceSnake();
@@ -144,6 +145,6 @@ function drawGameOver() {
   context.fillStyle = "black";
   context.textBaseline = "middle";
   context.textAlign = "center";
-  context.font = "normal bold 20px serif";
+  context.font = "normal bold 60px 'Jersey 15'";
   context.fillText("Game Over!", gameCanvas.width / 2, gameCanvas.height / 2);
 }
