@@ -86,8 +86,28 @@ function changeDirection(event) {
   const UP_KEY = 38;
   const DOWN_KEY = 40;
 
-  if (changingDirection) return;
-  changingDirection = true;
+  const keyPressed = event.keyCode;
+  const goingUp = dy === -10;
+  const goingDown = dy === 10;
+  const goingRight = dx === 10;
+  const goingLeft = dx === -10;
+
+  if (keyPressed === LEFT_KEY && !goingRight) {
+    dx = -10;
+    dy = 0;
+  }
+  if (keyPressed === UP_KEY && !goingDown) {
+    dx = 0;
+    dy = -10;
+  }
+  if (keyPressed === RIGHT_KEY && !goingLeft) {
+    dx = 10;
+    dy = 0;
+  }
+  if (keyPressed === DOWN_KEY && !goingUp) {
+    dx = 0;
+    dy = 10;
+  }
 }
 
 createFood();
@@ -127,19 +147,30 @@ function drawFood() {
   context.fillRect(foodX, foodY, 10, 10);
   context.strokeRect(foodX, foodY, 10, 10);
 }
+let gameOverInterval;
 
 function didGameEnd() {
   for (let i = 4; i < snake.length; i++) {
     const didCollide = snake[i].x === snake[0].x && snake[i].y === snake[0].y;
 
-    if (didCollide) return true;
+    if (didCollide) {
+      startGameOver();
+      return true;
+    }
   }
   const hitLeftWall = snake[0].x < 0;
   const hitRightWall = snake[0].x > gameCanvas.width - 10;
   const hitToptWall = snake[0].y < 0;
   const hitBottomWall = snake[0].y > gameCanvas.height - 10;
-  return hitLeftWall || hitRightWall || hitToptWall || hitBottomWall;
+
+  if (hitLeftWall || hitRightWall || hitToptWall || hitBottomWall) {
+    startGameOver();
+    return true;
+  }
+  return false;
 }
+
+let gameOverVisible = true;
 
 function drawGameOver() {
   context.fillStyle = "black";
@@ -147,4 +178,16 @@ function drawGameOver() {
   context.textAlign = "center";
   context.font = "normal bold 60px 'Jersey 15'";
   context.fillText("Game Over!", gameCanvas.width / 2, gameCanvas.height / 2);
+}
+
+function startGameOver() {
+  gameOverInterval = setInterval(() => {
+    gameOverVisible = !gameOverVisible;
+    clearCanvas();
+    drawGameOver();
+  }, 400);
+}
+
+function restartGame() {
+  clearInterval(gameOverInterval);
 }
