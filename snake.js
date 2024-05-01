@@ -173,11 +173,13 @@ function didGameEnd() {
 let gameOverVisible = true;
 
 function drawGameOver() {
-  context.fillStyle = "black";
-  context.textBaseline = "middle";
-  context.textAlign = "center";
-  context.font = "normal bold 60px 'Jersey 15'";
-  context.fillText("Game Over!", gameCanvas.width / 2, gameCanvas.height / 2);
+  if (gameOverVisible) {
+    context.fillStyle = "black";
+    context.textBaseline = "middle";
+    context.textAlign = "center";
+    context.font = "normal bold 60px 'Jersey 15'";
+    context.fillText("Game Over!", gameCanvas.width / 2, gameCanvas.height / 2);
+  }
 }
 
 function startGameOver() {
